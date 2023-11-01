@@ -1,2 +1,46 @@
-game_name,AverageeuSales
-Wii Sports,29.02
+-- 	
+--Calculating the Maximum Sale for north america sales
+SELECT max(na_sales)
+FROM ConsoleDates
+inner JOIN ConsoleGames
+	on ConsoleDates.Platform_name = ConsoleGames.Platform_name
+
+--Praticing the Wildcard query 
+select *
+from ConsoleDates
+where Comment like 'Nintendo%'
+
+
+-- select game_year, count(game_year)
+FROM ConsoleGames
+GROUP by game_year
+order by count(game_year) ASC
+-- Praticing the Order by and Group by QUery 
+
+-- Praticing Inner join query via platform name 
+SELECT *
+FROM ConsoleDates
+inner join ConsoleGames
+	on ConsoleDates.Platform_name = ConsoleGames.Platform_name
+
+--praticing Case statement
+SELECT game_name,game_year, genre,
+CASE
+	WHEN game_year > 2010 then 'Gen-z'
+	ELSE 'Milienum'
+	End as GenerationCatergory
+FROM ConsoleDates
+INNER JOIN ConsoleGames
+on ConsoleDates.Platform_name = ConsoleGames.Platform_name
+WHERE game_year is not NULL
+order by game_year ASC
+
+--Praticing Having Clause statement
+SELECT game_name, avg(eu_sales) AS AverageeuSales
+FROM ConsoleDates
+inner JOIN ConsoleGames
+	on ConsoleDates.Platform_name = ConsoleGames.Platform_name
+Group by eu_sales
+HAVING avg(eu_sales) > 20.43
+order by avg(eu_sales)
+
